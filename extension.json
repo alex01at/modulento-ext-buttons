@@ -1,0 +1,9 @@
+{
+    "id": "buttons",
+    "name": "Buttons",
+    "version": "0.1.0",
+    "api": 1,
+    "type": "addon",
+    "description": "A public page to lay out images in 57mm circles and export a print-ready PDF for a button maker.",
+    "namespace": "Modulento\\Buttons"
+}

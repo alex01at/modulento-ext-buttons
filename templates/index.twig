@@ -1,0 +1,64 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}{{ trans('buttons.title') }} – {{ site_name }}{% endblock %}
+
+{% block meta_description %}{{ trans('buttons.intro') }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ ext_asset('buttons', 'buttons.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>{{ trans('buttons.title') }}</h1>
+<p>{{ trans('buttons.intro') }}</p>
+
+<div
+    class="buttons-page"
+    id="buttons-app"
+    data-diameter="{{ diameter }}"
+    data-export-url="{{ url('/buttons/export') }}"
+    data-csrf="{{ csrf_token() }}"
+    data-empty-text="{{ trans('buttons.list.empty') }}"
+    data-remove-text="{{ trans('buttons.list.remove') }}"
+    data-summary-text="{{ trans('buttons.list.summary') }}"
+    data-building-text="{{ trans('buttons.export.building') }}"
+    data-error-text="{{ trans('buttons.export.error') }}"
+>
+    <section class="panel">
+        <h2>{{ trans('buttons.editor.title') }}</h2>
+        <div class="buttons-editor">
+            <input type="file" id="buttons-file" accept="image/*">
+            <canvas class="buttons-canvas" id="buttons-canvas" width="680" height="680"></canvas>
+            <div class="buttons-controls">
+                <label>{{ trans('buttons.editor.zoom') }} <span id="buttons-zoom-val">100%</span></label>
+                <input type="range" id="buttons-zoom" min="100" max="400" value="100">
+                <label>{{ trans('buttons.editor.qty') }} <input type="number" class="buttons-qty-input" id="buttons-qty" min="1" max="500" value="1"></label>
+            </div>
+            <button type="button" class="buttons-btn-primary" id="buttons-add" disabled>{{ trans('buttons.editor.add') }}</button>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>{{ trans('buttons.list.title') }}</h2>
+        <div class="buttons-list" id="buttons-list">
+            <p class="buttons-empty">{{ trans('buttons.list.empty') }}</p>
+        </div>
+        <div class="buttons-summary" id="buttons-summary"></div>
+        <label class="buttons-option">
+            <input type="checkbox" id="buttons-guide" checked> {{ trans('buttons.option.guide') }}
+        </label>
+        <label class="buttons-option">
+            <input type="checkbox" id="buttons-autofill" checked> {{ trans('buttons.option.autofill') }}
+        </label>
+        <button type="button" class="buttons-btn-primary buttons-mt" id="buttons-export" disabled>{{ trans('buttons.export.action') }}</button>
+    </section>
+
+    <section class="panel buttons-preview-panel" id="buttons-preview-panel">
+        <h2>{{ trans('buttons.preview.title') }}</h2>
+        <iframe class="buttons-preview-frame" id="buttons-preview-frame"></iframe>
+        <button type="button" class="buttons-btn-primary buttons-mt" id="buttons-download">{{ trans('buttons.preview.download') }}</button>
+    </section>
+</div>
+
+<script src="{{ ext_asset('buttons', 'buttons.js') }}" defer></script>
+{% endblock %}
